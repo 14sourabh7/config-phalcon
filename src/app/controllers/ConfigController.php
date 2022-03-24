@@ -12,9 +12,9 @@ class ConfigController extends Controller
      */
     public function indexAction()
     {
-        $config = $this->di->getConfig();
+        $config = $this->config->app;
 
-        $this->view->name = $config->get('app')->get('name');
-        $this->view->version = $config->get('app')->get('version');
+        $this->view->name = $config->name;
+        $this->view->version = $config->version;
     }
 }
