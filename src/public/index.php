@@ -74,13 +74,13 @@ $container->set(
 $container->set(
     'db',
     function () {
-        $config = $this->get('config')->get('app');
+        $config = $this->get('config')->get('db');
         return new Mysql(
             [
-                'host'     => $config->get('host'),
-                'username' => $config->get('username'),
-                'password' => $config->get('password'),
-                'dbname'   => $config->get('dbname'),
+                'host'     => $config->host,
+                'username' => $config->username,
+                'password' => $config->password,
+                'dbname'   => $config->dbname,
             ]
         );
     }
