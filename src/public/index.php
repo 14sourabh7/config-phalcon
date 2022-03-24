@@ -55,26 +55,24 @@ $container->set(
 
 $application = new Application($container);
 
-
+$filename = '../app/etc/config.php';
+$factory = new ConfigFactory();
+$config =  $factory->newInstance('php', $filename);
 $container->set(
     'config',
-    function () {
-        $filename = '../app/etc/config.php';
-        $factory = new ConfigFactory();
-        return $factory->newInstance('php', $filename);
-    },
+    $config,
     true
 );
 $container->set(
     'db',
     function () {
-        $config = $this->get('config')->get('db');
+        global $config;
         return new Mysql(
             [
-                'host'     => $config->get('host'),
-                'username' => $config->get('username'),
-                'password' => $config->get('password'),
-                'dbname'   => $config->get('dbname'),
+                'host'  => $config->db->host,
+                'username' => $config->db->username,
+                'password' => $config->db->password,
+                'dbname'   => $config->db->dbname,
             ]
         );
     }
