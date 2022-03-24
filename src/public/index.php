@@ -55,16 +55,16 @@ $container->set(
 
 $application = new Application($container);
 
+
 /**
  * setting config
  */
+$filename = '../app/etc/config.php';
+$factory = new ConfigFactory();
+$config = $factory->newInstance('php', $filename);
 $container->set(
     'config',
-    function () {
-        $filename = '../app/etc/config.php';
-        $factory = new ConfigFactory();
-        return $factory->newInstance('php', $filename);
-    },
+    $config,
     true
 );
 
@@ -74,7 +74,6 @@ $container->set(
 $container->set(
     'db',
     function () {
-        $config = $this->get('config')->get('db');
         return new Mysql(
             [
                 'host'     => $config->host,
