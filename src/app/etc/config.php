@@ -1,5 +1,5 @@
 <?php
-//config file
+//config file..
 return [
     'app' => [
         'name' => 'config Assignment',

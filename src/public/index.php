@@ -69,7 +69,7 @@ $container->set(
 );
 
 /**
- * using config variables in db
+ * using config variables in db..
  */
 $container->set(
     'db',

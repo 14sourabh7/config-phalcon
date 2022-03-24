@@ -6,7 +6,7 @@ use Phalcon\Mvc\Controller;
 class ConfigController extends Controller
 {
     /**
-     * index function to print config variables
+     * index function to print config variables...
      *
      * @return void
      */
