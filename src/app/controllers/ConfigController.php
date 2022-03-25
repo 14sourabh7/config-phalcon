@@ -17,4 +17,13 @@ class ConfigController extends Controller
         $this->view->name = $config->name;
         $this->view->version = $config->version;
     }
+    public function loaderAction()
+    {
+        $check = new \App\Controller\Check();
+        if ($check->check()) {
+            return '<h1>It works!!!</h1>';
+        } else {
+            return '<h1>still not worked</h1>';
+        }
+    }
 }

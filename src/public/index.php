@@ -14,6 +14,7 @@ use Phalcon\Config;
 use Phalcon\Config\ConfigFactory;
 use Phalcon\Session\Manager;
 use Phalcon\Session\Adapter\Stream;
+use Phalcon\Escaper;
 
 $config = new Config([]);
 
@@ -28,6 +29,12 @@ $loader->registerDirs(
     [
         APP_PATH . "/controllers/",
         APP_PATH . "/models/",
+    ]
+);
+
+$loader->registerNamespaces(
+    [
+        'App\Controller' => APP_PATH . "/components"
     ]
 );
 
@@ -111,6 +118,13 @@ $container->set(
     true
 );
 
+$container->set(
+    'escaper',
+    function () {
+        return new Escaper();
+    },
+    true
+);
 
 
 try {

@@ -51,9 +51,17 @@ class UserController extends Controller
             $this->request->isPost() && $this->request->getPost('email')
             && $this->request->getPost()['name'] && $this->request->getPost()['password']
         ) {
+
+            $escaper = $this->escaper;
+            $userArr = array(
+                'name' => $escaper->escapeHtml($this->request->getPost()['name']),
+                'email' => $escaper->escapeHtml($this->request->getPost()['email']),
+                'password' => $escaper->escapeHtml($this->request->getPost()['password'])
+            );
             $user = new Users();
+
             $user->assign(
-                $this->request->getPost(),
+                $userArr,
                 [
                     'name',
                     'email',
@@ -85,7 +93,7 @@ class UserController extends Controller
 
 
         $session = $this->session;
-
+        $escaper = $this->escaper;
         $response = new Response();
 
         /**
@@ -93,8 +101,8 @@ class UserController extends Controller
          */
         $check = $this->request->isPost();
         if ($check) {
-            $email = $this->request->getPost()['email'];
-            $password = $this->request->getPost()['password'];
+            $email = $escaper->escapeHtml($this->request->getPost()['email']);
+            $password = $escaper->escapeHtml($this->request->getPost()['password']);
             $user = new Users();
             $data = $user->checkUser($email, $password);
             if ($data) {
